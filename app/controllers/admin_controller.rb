@@ -3,7 +3,8 @@ class AdminController < ApplicationController
   end
 
   def scrape
- 	importers = [AgeImporter.new, SmhImporter.new, GuardianImporter.new, SbsImporter.new, HeraldImporter.new, AbcImporter.new, NyImporter.new]
+
+ 	importers = [AgeImporter.new, SmhImporter.new, GuardianImporter.new, SbsImporter.new, HeraldImporter.new, AbcImporter.new, NyImporter.new, SourceImporter.new]
   	importers.each do |importer|
   		importer.scrape
   	end

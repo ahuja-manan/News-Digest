@@ -36,17 +36,18 @@ class NyImporter
 		# are actually stored at response_json['response']['results']
 		response_json['results'].each do |item|
 		    # Save article only if it doesn't already exist			
-			if NyArticle.find_by title: item["title"]
-		    	return
-		    else
-			    # Create GuardianArticle object for each item (with only the necessary attributes)		    				
-				article = NyArticle.new(title: item['title'],pub_date: item['published_date'],summary: item['abstract'], author: item['byline'], img: nil, link: item['url'])
+			#if NyArticle.find_by title: item["title"]
+		    #	return
+		    #else
+			    # Create GuardianArticle object for each item (with only the necessary attributes)	
+			    @source = Source.find_by_name("New York Times")		    				
+				@article = @source.articles.create(title: item['title'],pub_date: item['published_date'],summary: item['abstract'], author: item['byline'], img: nil, link: item['url'])
 			    # Add tags
-			    article.tag_list.add("New york times", "travel")
+			    #article.tag_list.add("New york times", "travel")
 			    #tag_text(item["webTitle"]).each {|k,v| article.tag_list.add(k)}		
 			    # Save to model	    				
-				article.save
-			end
+				#article.save
+			#end
 		end
 	end	
 

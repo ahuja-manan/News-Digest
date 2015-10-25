@@ -2,14 +2,13 @@
 
 <div align="center">
 	<h1>All Articles</h1>
-	<%= link_to "Click me to get the latest news!", refresh_path, method: :get, class:'btn btn-success' %>
 </div>
 
 <br/><br/>
 
 
-<% @article_sources.each do |article_source| 
-	article_source[0].each do |article| %>
+<% @articles.each do |article| 
+	@source = Source.find(article.source_id).name %>
 
 		  <div class="panel panel-info"> 
 		    <div class="panel-heading">
@@ -17,11 +16,7 @@
 		    </div>
 
 		    <div class="panel-body">
-				<p>Source : <%= article_source[1] %> </p>
-
-				<% if article_source[1] == "The Guardian" %>
-				<p>Category : <%= article.category_name %> </p> 
-				<% end %>
+				<p>Source : <%= @source %> </p>
 
 				<% if article.author %>
 				<p>Authored By : <%= article.author %> </p>
@@ -41,6 +36,4 @@
 
 			 </div>
 		  </div>
-
-	<% end %>
 <% end %>

@@ -54,18 +54,19 @@ class AgeImporter
 		    feed = RSS::Parser.parse(rss)
 		    feed.items.each do |item|
 		    	# Save article only if it doesn't already exist		    	
-		    	if AgeArticle.find_by title: item.title
-		    		return
-		    	else			    	
+		    	#if Article.find_by title: item.title
+		    	#	return
+		    	#else			    	
 			    	# Create Article object for each item (with only the necessary attributes)
-			    	article = AgeArticle.new(author: nil, title: item.title, summary: interpret_summary(item.description), 
+			    	@source = Source.find_by_name("The Age")
+			    	@article = @source.articles.create(author: nil, title: item.title, summary: interpret_summary(item.description), 
 			    						        img: interpret_image(item.description), link: item.link, pub_date: item.pubDate)
 			    	# Add tags
-			    	article.tag_list.add("The Age", "Technology")
-			    	tag_text(interpret_summary(item.description)).each {|k,v| article.tag_list.add(k)}		    	
+			    	#article.tag_list.add("The Age", "Technology")
+			    	#tag_text(interpret_summary(item.description)).each {|k,v| article.tag_list.add(k)}		    	
 			    	# Save to model		
-			    	article.save
-			    end
+			    	#article.save
+			    #end
 		    end
 		end
 	end

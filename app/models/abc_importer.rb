@@ -23,18 +23,22 @@ class AbcImporter
 	  feed = RSS::Parser.parse(rss)
 	  feed.items.each do |item|
 	    # Save article only if it doesn't already exist
-	    if AbcArticle.find_by title: item.title
-	      return
-	    else	
+	    #if Article.find_by title: item.title
+	     # return
+	    #else	
+	      @source = Source.find_by_name("ABC")
+	      @article = @source.articles.create(author: item.dc_creator, title: item.title, summary: item.description,img: nil, link: item.link, pub_date: item.pubDate)
 	      # Create Article object for each item (with only the necessary attributes)
-		  article = AbcArticle.new(author: item.dc_creator, title: item.title, summary: item.description, 
-			    						        img: nil, link: item.link, pub_date: item.pubDate)
+		  #@article = Article.new(sourceID: 1, author: item.dc_creator, title: item.title, summary: item.description, 
+			    						       # img: nil, link: item.link, pub_date: item.pubDate)
+		 # source = Source.find_by_name("ABC");
+		 # article.source = source
 		  # Add tags
-		  article.tag_list.add("ABC", "Current Affairs")
-	      tag_text(item.description).each {|k,v| article.tag_list.add(k)}
+		  #article.tag_list.add("ABC", "Current Affairs")
+	      #tag_text(item.description).each {|k,v| article.tag_list.add(k)}
 	      # Save to model
-		  article.save
-	    end
+		  #@article.save
+	    #end
       end
     end
   end

@@ -22,18 +22,19 @@ class SbsImporter
 		    feed = RSS::Parser.parse(rss)
 		    feed.items.each do |item|
 		    	# Save article only if it doesn't already exist		    	
-		    	if SbsArticle.find_by title: item.title
-		    		return
-		    	else
+		    	#if SbsArticle.find_by title: item.title
+		    	#	return
+		    	#else
 			    	# Create Article object for each item (with only the necessary attributes)
-			    	article = SbsArticle.new(author: item.dc_creator, title: item.title, summary: item.description, 
+			    	@source = Source.find_by_name("SBS")	
+			    	@article = @source.articles.create(author: item.dc_creator, title: item.title, summary: item.description, 
 			    						        img: nil, link: item.link, pub_date: item.pubDate)
 			    	# Add tags
-			    	article.tag_list.add("SBS")
-			    	tag_text(item.description).each {|k,v| article.tag_list.add(k)}	
+			    	#article.tag_list.add("SBS")
+			    	#tag_text(item.description).each {|k,v| article.tag_list.add(k)}	
 			    	# Save to model		    	
-			    	article.save
-			    end
+			    	#article.save
+			    #end
 		    end
 		end
 	end
