@@ -3,6 +3,11 @@ source 'https://rubygems.org'
 
 # https://github.com/mbleigh/acts-as-taggable-on
 gem 'acts-as-taggable-on', '~> 3.4'
+
+gem 'open_calais', '~> 0.3.2'
+#gem 'sentimental', '~> 1.0', '>= 1.0.3'
+#gem 'alchemy-api-rb', '~> 0.5.4'
+gem 'indico', '~> 0.5.3'
 # https://github.com/yohasebe/engtagger
 gem 'engtagger', '~> 0.2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

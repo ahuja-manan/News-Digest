@@ -14,7 +14,7 @@ before_action :authenticate_user
    # @articles.each do |source|
    #   @all_articles.concat(source.all)
    # end
-   # @all_articles.sort!(&:pub_date)
+    @articles.order! 'pub_date DESC'
   end
 
   def my_interests
