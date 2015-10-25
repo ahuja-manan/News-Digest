@@ -24,6 +24,9 @@ before_action :authenticate_user
     # else
     #   @article_sources = Article.all.order('created_at DESC')
     # end
+
+    # INSTEAD TAKE OUT THE LOGIC HERE AND DO THIS:
+    # @article_sources = Article.search(params[:search])
   end
 
   def my_interests

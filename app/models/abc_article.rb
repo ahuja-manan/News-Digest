@@ -3,27 +3,31 @@ class AbcArticle < ActiveRecord::Base
   # Articles can have tags
   acts_as_taggable
 
-  def self.search(search)
-  # Title is for the above case, the OP incorrectly had 'name'
-
-  for all articles
-    weighting = 0
-    if article.tags #insert regex
-      weighting += 4
-    end
-    if article.title
-      weighting += 3
-    end
-    if article.description
-      weighting += 2
-    end
-    if article.source
-      weighting += 1
-    end
-    store each article in dictionary (article is attribute and value is weighting)
-  end
-
-  sort articles by weight and if same weight, by date. <- do either here or in controller
+  # def self.search(search)
+  # # Title is for the above case, the OP incorrectly had 'name'
+  # if search
+  #   find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+  # else
+  #   find(:all)
+  # end
+  # for article in @articles_source
+  #   weighting = 0
+  #   if article.tags #insert regex
+  #     weighting += 4
+  #   end
+  #   if article.title
+  #     weighting += 3
+  #   end
+  #   if article.description
+  #     weighting += 2
+  #   end
+  #   if article.source
+  #     weighting += 1
+  #   end
+  #   store each article in dictionary (article is attribute and value is weighting)
+  # end
+  #
+  # sort articles by weight and if same weight, by date. <- do either here or in controller
 
   # How to put weight in here and search based on weight
 
