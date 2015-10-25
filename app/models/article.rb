@@ -4,17 +4,21 @@ class Article < ActiveRecord::Base
 	acts_as_taggable
 	belongs_to :source
 
+	# This method searches through the articles, given an input,
+	# in order of weight, then publication date
 	def self.search(search, articles)
 
-		#Item = Struct.new(:article, :date, :weighting)
-
-
+		# Initialise array of searched articles and hash table of weights
 		searched_articles = Array.new
 		weights = Hash.new
+
 		for article in articles
 			weighting = 0
+
+			# Search just for the words in the input
 			regex = /\b#{search}\b/
 
+			# Assign weighting for tag matching
 			if article.tag_list != nil
 				for tag in article.tag_list
 					tag_matches = tag.scan regex
@@ -24,12 +28,16 @@ class Article < ActiveRecord::Base
 					end
 				end
 			end
+
+			# Assign weighting for title matching
 			if article.title != nil
 				title_matches = article.title.scan regex
 				if title_matches.length > 0
 					weighting += 3
 				end
 			end
+
+			# Assign weighting for summary matching
 			if article.summary != nil
 				summary_matches = article.summary.scan regex
 				if summary_matches.length > 0
@@ -37,6 +45,7 @@ class Article < ActiveRecord::Base
 				end
 			end
 
+			# Search for substrings for the source name
 			regex = /#{search}/
 			if article.source.name != nil
 				source_match = article.source.name.scan regex
@@ -45,22 +54,18 @@ class Article < ActiveRecord::Base
 				end
 			end
 
+			# If there is a match from searching, add this to the returned
+			# array of articles. But first store in hash table to sort by weight/date
 			if weighting > 0
 				weights[article] = weighting
-				#searched_articles.push(article)
 			end
-
-
-			# TODO: ATTACH WEIGHTING TO EACH ARTICLE, IE VIA DICTIONARY. THEN SORT DICTIONARY AND RATE ACCORDINGLY. ALSO SORT BY DATE OTHERWISE THEN RETURN ARTICLE
-
-
 		end
-		#sorted_weights = weights.sort_by {|x| [x.game_date, x.team] }
-		#weights.sort_by {|_key, value| value}
 
-		weights.sort_by {|_key, value| [value, _key.pub_date]}
+		# Sort by weight, then by date on matching weights
+		weights = weights.sort_by {|k, v| [v, k.pub_date]}.reverse.to_h
+		weights.each {|k,v| puts "#{v} #{k} #{k.pub_date}"}
 
-		#searched_articles = weights.keys
+		# Return the articles themselves
 		searched_articles = weights.keys
 	end
 end
