@@ -42,7 +42,7 @@ class GuardianImporter
 			    # Create GuardianArticle object for each item (with only the necessary attributes)		    				
 				article = GuardianArticle.new(category_name: item["sectionName"], author: nil, title: item["webTitle"], summary: nil, img: nil, link: item["webUrl"], pub_date: item["webPublicationDate"])
 			    # Add tags
-			    article.tag_list.add("The Guardian", "startup", item.category_name)
+			    article.tag_list.add("The Guardian", "startup", item["sectionName"])
 			    tag_text(item["webTitle"]).each {|k,v| article.tag_list.add(k)}		
 			    # Save to model	    				
 				article.save
