@@ -24,7 +24,7 @@ class AdminController < ApplicationController
 
       @sources.each do |s|
         tags = s.tag(text)
-        tags.each {|t| a.tag_list.add(t.downcase!)}
+        tags.each {|t| a.tag_list.add(t)}
         a.save
       end
   	end
