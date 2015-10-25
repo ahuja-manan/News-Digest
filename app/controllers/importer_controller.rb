@@ -1,5 +1,5 @@
 #
-# This controller imports and scrapes data from 6 different 
+# This controller imports and scrapes data from 6 different
 # sources. It then puts all this interpreted & validated data i
 # into an array for rendering to the index view.
 #
@@ -15,6 +15,13 @@ before_action :authenticate_user
    #   @all_articles.concat(source.all)
    # end
    # @all_articles.sort!(&:pub_date)
+    if params[:search]
+      @articles = Article.search(params[:search])
+    else
+      @articles = Article.all
+    end
+
+   #@articles = Article.search(params[:search])
   end
 
   def my_interests
@@ -26,10 +33,10 @@ before_action :authenticate_user
  # 	importers = [AgeImporter.new, SmhImporter.new, GuardianImporter.new, SbsImporter.new, HeraldImporter.new, AbcImporter.new, NyImporter.new]
   #	importers.each do |importer|
   #		importer.scrape
-  #	end	
-  #end	
+  #	end
+  #end
 
-# Scrape and then render. The scrape methods of all the 
+# Scrape and then render. The scrape methods of all the
 # importer classes take care of importing only the latest articles
   #def refresh
    # scrape
