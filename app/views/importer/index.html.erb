@@ -7,36 +7,49 @@
 
 <br/><br/>
 
+<!-- <div class="form-group">
+	<input type="text" class="form-control" placeholder="Search">
+</div>
+<button type="submit" class="btn btn-default">Submit</button> -->
 
-<% @article_sources.each do |article_source| 
+<%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+
+<br/><br/>
+
+
+<% @article_sources.each do |article_source|
 	article_source[0].each do |article| %>
 
-		  <div class="panel panel-info"> 
+		  <div class="panel panel-info">
 		    <div class="panel-heading">
-		      <h3 class="panel-title"><b><%= article.title %></b> - <%= article.pub_date %></h3> 
+		      <h3 class="panel-title"><b><%= article.title %></b> - <%= article.pub_date %></h3>
 		    </div>
 
 		    <div class="panel-body">
 				<p>Source : <%= article_source[1] %> </p>
 
 				<% if article_source[1] == "The Guardian" %>
-				<p>Category : <%= article.category_name %> </p> 
+				<p>Category : <%= article.category_name %> </p>
 				<% end %>
 
 				<% if article.author %>
 				<p>Authored By : <%= article.author %> </p>
 				<% end %>
-				
+
 				<% if article.summary %>
 			    <p>Summary : <%= article.summary %> </p>
 				<% end %>
-			    
+
 			    <p>Link : <a href = <%= article.link %> > <%= article.link %> </a> </p>
 
 			    <p>Tags : <%= article.tag_list %> </p>
 
 				<% if article.img %>
-			    <img height = "75" width = "100" src = <%= article.img %> > 
+			    <img height = "75" width = "100" src = <%= article.img %> >
 				<% end %>
 
 			 </div>
