@@ -15,8 +15,13 @@ before_action :authenticate_user
    #   @all_articles.concat(source.all)
    # end
    # @all_articles.sort!(&:pub_date)
+    # if params[:search]
+    #   @articles = Article.search(params[:search])
+    # else
+    #   @articles = Article.all
+    # end
     if params[:search]
-      @articles = Article.search(params[:search])
+      @articles = Article.search(params[:search], @articles)
     else
       @articles = Article.all
     end
