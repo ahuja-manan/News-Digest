@@ -28,9 +28,9 @@
       <h3> Pick a username and password! </h3>
       <div class="form-group">
         <% if defined?(new_user) && new_user %>
-+          <%= f.label :username %><br>
-+          <%= f.text_field :username, class: 'form-control' %>
-+        <% end %>
+          <%= f.label :username %><br>
+          <%= f.text_field :username, class: 'form-control' %>
+        <% end %>
        </div>
       </div>
 
@@ -57,15 +57,15 @@
 
      <div class="form-group">
        <% if defined?(edit) && edit %>
-+          <%= f.label :interest_list %><br>
-+          <%= f.text_field :interest_list, class: 'form-control' %>
-+        <% end %>
-+     </div>
-+
-+     <div class="form-group">
-+       <%= check_box_tag(:is_registered) %>
-+       <%= label_tag(:is_registered, "I would like to register for a News Digest sent to my email") %>
-+     </div>
+          <%= f.label :interest_list %><br>
+          <%= f.text_field :interest_list, class: 'form-control' %>
+        <% end %>
+     </div>
+
+     <div class="form-group">
+       <%= check_box_tag(:is_registered) %>
+       <%= label_tag(:is_registered, "I would like to register for a News Digest sent to my email") %>
+     </div>
 
       <div class="form-group">
         <%= f.submit 'Save', class: 'btn btn-default' %>
