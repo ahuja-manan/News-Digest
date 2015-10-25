@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'admin/index'
+
+  get 'admin_controller/refresh'
+
   root 'session#unauth'
   resources :users
 
@@ -8,7 +12,8 @@ Rails.application.routes.draw do
 
   get '/index', to: 'importer#index', as: 'articles'
   get '/interests', to: 'importer#my_interests', as: 'interests'
-  get '/refresh', to: 'importer#refresh', as: 'refresh'
+  get '/admin/scrape', to: 'admin#scrape', as: 'scrape'
+  get '/admin', to: 'admin#index', as: 'index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

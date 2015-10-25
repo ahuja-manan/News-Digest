@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151025015046) do
+ActiveRecord::Schema.define(version: 20151025092553) do
 
-  create_table "abc_articles", force: :cascade do |t|
+  create_table "articles", force: :cascade do |t|
     t.string   "title"
     t.string   "pub_date"
     t.string   "summary"
@@ -22,60 +22,13 @@ ActiveRecord::Schema.define(version: 20151025015046) do
     t.string   "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "source_id"
   end
 
-  create_table "age_articles", force: :cascade do |t|
-    t.string   "title"
-    t.string   "pub_date"
-    t.string   "summary"
-    t.string   "author"
-    t.string   "img"
-    t.string   "link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "articles", ["source_id"], name: "index_articles_on_source_id"
 
-  create_table "guardian_articles", force: :cascade do |t|
-    t.string   "title"
-    t.string   "pub_date"
-    t.string   "summary"
-    t.string   "author"
-    t.string   "img"
-    t.string   "link"
-    t.string   "category_name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  create_table "herald_articles", force: :cascade do |t|
-    t.string   "title"
-    t.string   "pub_date"
-    t.string   "summary"
-    t.string   "author"
-    t.string   "img"
-    t.string   "link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sbs_articles", force: :cascade do |t|
-    t.string   "title"
-    t.string   "pub_date"
-    t.string   "summary"
-    t.string   "author"
-    t.string   "img"
-    t.string   "link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "smh_articles", force: :cascade do |t|
-    t.string   "title"
-    t.string   "pub_date"
-    t.string   "summary"
-    t.string   "author"
-    t.string   "img"
-    t.string   "link"
+  create_table "sources", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

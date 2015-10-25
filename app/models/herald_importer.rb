@@ -39,18 +39,19 @@ class HeraldImporter
 		    feed = RSS::Parser.parse(rss)
 		    feed.items.each do |item|
 		    	# Save article only if it doesn't already exist		    
-		    	if HeraldArticle.find_by title: item.title
-		    		return
-		    	else
+		    	#if HeraldArticle.find_by title: item.title
+		    	#	return
+		    	#else
 			    	# Create Article object for each item (with only the necessary attributes)
-			    	article = HeraldArticle.new(author: nil, title: item.title, summary: item.description, 
+			    	@source = Source.find_by_name("The Herald Sun")	
+			    	@article = @source.articles.create(author: nil, title: item.title, summary: item.description, 
 			    						        img: interpret_image(item.enclosure), link: item.link, pub_date: item.pubDate)
 			    	# Add tags
-			    	article.tag_list.add("The Herald Sun", "Sport")
-			    	tag_text(item.description).each {|k,v| article.tag_list.add(k)}	
+			    	#article.tag_list.add("The Herald Sun", "Sport")
+			    	#tag_text(item.description).each {|k,v| article.tag_list.add(k)}	
 			    	# Save to model
-			    	article.save
-			    end
+			    	#article.save
+			    #end
 		    end
 		end
 	end

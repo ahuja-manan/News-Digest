@@ -36,17 +36,18 @@ class GuardianImporter
 		# are actually stored at response_json['response']['results']
 		response_json['response']['results'].each do |item|
 		    # Save article only if it doesn't already exist			
-			if GuardianArticle.find_by title: item["webTitle"]
-		    	return
-		    else
-			    # Create GuardianArticle object for each item (with only the necessary attributes)		    				
-				article = GuardianArticle.new(category_name: item["sectionName"], author: nil, title: item["webTitle"], summary: nil, img: nil, link: item["webUrl"], pub_date: item["webPublicationDate"])
+			#if GuardianArticle.find_by title: item["webTitle"]
+		    #	return
+		   # else
+			    # Create GuardianArticle object for each item (with only the necessary attributes)	
+			    @source = Source.find_by_name("The Guardian")	    				
+				@article = @source.articles.create(author: nil, title: item["webTitle"], summary: nil, img: nil, link: item["webUrl"], pub_date: item["webPublicationDate"])
 			    # Add tags
-			    article.tag_list.add("The Guardian", "startup", item["sectionName"])
-			    tag_text(item["webTitle"]).each {|k,v| article.tag_list.add(k)}		
+			    #article.tag_list.add("The Guardian", "startup", item["sectionName"])
+			    #tag_text(item["webTitle"]).each {|k,v| article.tag_list.add(k)}		
 			    # Save to model	    				
-				article.save
-			end
+				#article.save
+			#end
 		end
 	end	
 
