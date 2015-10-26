@@ -10,6 +10,8 @@ gem 'open_calais', '~> 0.3.2'
 gem 'indico', '~> 0.5.3'
 # https://github.com/yohasebe/engtagger
 gem 'engtagger', '~> 0.2.0'
+# Mandrill API
+gem 'mandrill-api', '~> 1.0', '>= 1.0.53', require: "mandrill"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
