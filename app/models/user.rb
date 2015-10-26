@@ -6,7 +6,8 @@
 class User < ActiveRecord::Base
 	# Validations
  	validates_presence_of :email, :first_name, :last_name, :username
-  	validates :email, format: { with: /(.+)@(.+).[a-z]{2,4}/, message: "%{value} is not a valid email" }
+  	#validates :email, format: { with: /(.+)@(.+).[a-z]{2,4}/, message: "%{value} is not a valid email" }
+  	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   	validates :username, length: { minimum: 3 }
     validates :password, length: { minimum: 8, message: "must be greater than 7 characters" }
     validates_uniqueness_of :username
