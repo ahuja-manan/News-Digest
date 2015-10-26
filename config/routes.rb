@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get '/interests', to: 'importer#my_interests', as: 'interests'
   get '/admin/scrape', to: 'admin#scrape', as: 'scrape'
   get '/admin/tag', to: 'admin#tag', as: 'tag'
+  get '/admin/mail', to: 'admin#mail', as: 'mail'
+
   get '/admin', to: 'admin#index', as: 'index'
 
 
