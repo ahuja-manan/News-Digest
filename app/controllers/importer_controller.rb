@@ -22,7 +22,12 @@ before_action :authenticate_user
   end
 
   def my_interests
-    @articles = Article.tagged_with(current_user.interest_list, :any => true).to_a
+    @articles = Article.tagged_with(current_user.interest_list, :any => true)
+    if params[:search]
+      @articles = Article.search(params[:search], @articles)
+    else
+      @articles = Article.tagged_with(current_user.interest_list, :any => true).to_a
+    end
     render 'index'
   end
 end
