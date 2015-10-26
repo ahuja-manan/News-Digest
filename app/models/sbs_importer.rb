@@ -13,7 +13,9 @@ require 'open-uri'
 
 class SbsImporter
 
-	include TagHelper
+	def interpret_author description
+		author = description.gsub(/<div.*?>|<\/div>/, '')
+	end
 
 	# Scrape method that saves canned article data
 	def scrape
@@ -27,7 +29,7 @@ class SbsImporter
 		    	#else
 			    	# Create Article object for each item (with only the necessary attributes)
 			    	@source = Source.find_by_name("SBS")	
-			    	@article = @source.articles.create(author: item.dc_creator, title: item.title, summary: item.description, 
+			    	@article = @source.articles.create(author: interpret_author(item.dc_creator), title: CGI.unescapeHTML(item.title), summary: CGI.unescapeHTML(item.description.strip!), 
 			    						        img: nil, link: item.link, pub_date: item.pubDate)
 			    	# Add tags
 			    	#article.tag_list.add("SBS")

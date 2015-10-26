@@ -10,11 +10,12 @@
 require 'Date'
 require 'rss'
 require 'open-uri'
+include ActionView::Helpers::SanitizeHelper
 
 
 class HeraldImporter
 
-	include TagHelper
+	
 
 	def interpret_image source
 		# regular expression for images
@@ -44,7 +45,7 @@ class HeraldImporter
 		    	#else
 			    	# Create Article object for each item (with only the necessary attributes)
 			    	@source = Source.find_by_name("The Herald Sun")	
-			    	@article = @source.articles.create(author: nil, title: item.title, summary: item.description, 
+			    	@article = @source.articles.create(author: nil, title: item.title, summary: strip_tags(CGI.unescapeHTML(item.description)), 
 			    						        img: interpret_image(item.enclosure), link: item.link, pub_date: item.pubDate)
 			    	# Add tags
 			    	#article.tag_list.add("The Herald Sun", "Sport")

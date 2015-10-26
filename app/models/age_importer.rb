@@ -14,7 +14,7 @@ require 'open-uri'
 
 class AgeImporter
 
-	include TagHelper
+	
 
 	# This method interprets the description to return the image url
 	def interpret_image description

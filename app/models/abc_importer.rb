@@ -14,7 +14,7 @@ require 'open-uri'
 
 class AbcImporter
 
-  include TagHelper
+ 
 
   # Scrape method that saves canned article data
   def scrape

@@ -12,7 +12,7 @@ class AdminController < ApplicationController
 
   def tag
   	#if article table is empty
-    @sources = [EntaggerTags.new]
+    @sources = [EntaggerTags.new,IndicoTags.new, SentimentalTags.new, AlchemyTags.new]
   	@articles = Article.all
   	@articles.each do |a|
   		if(a.summary != nil)
@@ -24,8 +24,14 @@ class AdminController < ApplicationController
 
       @sources.each do |s|
         tags = s.tag(text)
-        tags.each {|t| a.tag_list.add(t.downcase!)}
-        a.save
+        if tags.is_a? Array
+          tags.each {|t| a.tag_list.add(t)}
+          a.save
+        elsif tags.is_a? String
+          a.tag_list.add(tags)
+          a.save
+        end
+          
       end
   	end
   end

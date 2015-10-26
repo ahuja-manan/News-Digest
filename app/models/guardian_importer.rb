@@ -14,7 +14,7 @@ require 'net/http'
 
 class GuardianImporter
 
-	include TagHelper
+	
 	
 	# Scrape method that saves canned article data
 	def scrape		

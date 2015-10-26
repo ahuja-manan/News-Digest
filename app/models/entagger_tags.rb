@@ -17,7 +17,7 @@ class EntaggerTags
 
 		# Get all nouns (not enough proper nouns in the data to get appropriate tags)
 		nouns = tagger.get_nouns(tagged)
-		nouns.keys
+		noun_tags = nouns.keys.map(&:downcase)
 	end	
 
 end	

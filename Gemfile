@@ -5,9 +5,10 @@ source 'https://rubygems.org'
 gem 'acts-as-taggable-on', '~> 3.4'
 
 gem 'open_calais', '~> 0.3.2'
-#gem 'sentimental', '~> 1.0', '>= 1.0.3'
-#gem 'alchemy-api-rb', '~> 0.5.4'
+gem 'sentimental', '~> 1.0', '>= 1.0.3'
+gem 'alchemy-api-rb', '~> 0.5.4'
 gem 'indico', '~> 0.5.3'
+gem 'will_paginate', '~> 3.0.5'
 # https://github.com/yohasebe/engtagger
 gem 'engtagger', '~> 0.2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

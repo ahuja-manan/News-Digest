@@ -8,7 +8,7 @@ class ImporterController < ApplicationController
 before_action :authenticate_user
 
   def index
-  	@articles = Article.all
+  	@articles = Article.all.paginate(:page => params[:page], :per_page => 10)
    # @articles = [AgeArticle, SmhArticle, GuardianArticle, SbsArticle, HeraldArticle, AbcArticle, NyArticle]
    # @all_articles = []
    # @articles.each do |source|
@@ -18,7 +18,8 @@ before_action :authenticate_user
   end
 
   def my_interests
-    @articles = Article.tagged_with(current_user.interest_list, :any => true).to_a
+    @articles = Article.tagged_with(current_user.interest_list, :any => true).paginate(:page => params[:page], :per_page => 10).to_a
+
     render 'index'
   end
 
