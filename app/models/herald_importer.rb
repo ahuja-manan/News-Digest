@@ -1,11 +1,12 @@
-# This class imports data from The Herald Sun RSS Feed
-# and stores them in Article db with a relation
-# to a row in Source db which has name "The Herald Importer"
 require 'Date'
 require 'rss'
 require 'open-uri'
 # Converts html entities to text
 include ActionView::Helpers::SanitizeHelper
+
+# This class imports data from The Herald Sun RSS Feed
+# and stores them in Article db with a relation
+# to a row in Source db which has name "The Herald Importer"
 class HeraldImporter
   def interpret_image(source)
     # regular expression for images
@@ -15,7 +16,6 @@ class HeraldImporter
     source.to_s[image_regex]
   end
 
-  # This method interprets the description to return the summary minus everything else
   def interpret_summary(description)
     description.slice!('<![CDATA[')
     description.slice!(']]>')
@@ -27,8 +27,7 @@ class HeraldImporter
     open(url) do |rss|
       feed = RSS::Parser.parse(rss)
       feed.items.each do |item|
-        # Create Article object for each item (with only the necessary attributes)
-        @source = Source.find_by_name("The Herald Sun")
+        @source = Source.find_by_name('The Herald Sun)
         @article = @source.articles.create(author: nil, title: item.title,\
                                            summary: strip_tags(CGI.unescapeHTML(item.description)),\
                                            img: interpret_image(item.enclosure),\

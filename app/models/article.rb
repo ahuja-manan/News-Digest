@@ -38,8 +38,7 @@ class Article < ActiveRecord::Base
       end
 
       next unless weighting > 0
-        weights[article] = weighting
-      end
+      weights[article] = weighting
     end
 
     # Sort by weight, then by date on matching weights

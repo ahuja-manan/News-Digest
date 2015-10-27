@@ -1,10 +1,9 @@
-# This class imports data from The Age's RSS Feed
-# and stores them in Article db with a relation
-# to a row in Source db which has name "The Age"
 require 'Date'
 require 'rss'
 require 'open-uri'
-
+# This class imports data from The Age's RSS Feed
+# and stores them in Article db with a relation
+# to a row in Source db which has name "The Age"
 class AgeImporter
   # This method interprets the description to return the image url
   def interpret_image(description)
@@ -12,7 +11,7 @@ class AgeImporter
     # all image srcs at this source start with http and end with jpg
     image_regex = /http.*(jpg)/
     # get img src out of description string
-	description.to_s[image_regex]
+	  description.to_s[image_regex]
   end
 
   def interpret_summary(description)
@@ -43,4 +42,3 @@ class AgeImporter
     end
   end
 end
-

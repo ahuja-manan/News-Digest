@@ -1,10 +1,9 @@
-# This class imports data from ABC's RSS Feed
-# and stores them in Article db with a relation
-# to a row in Source db which has name "ABC"
 require 'Date'
 require 'rss'
 require 'open-uri'
-
+# This class imports data from ABC's RSS Feed
+# and stores them in Article db with a relation
+# to a row in Source db which has name "ABC"
 class AbcImporter
   def scrape
     url = 'http://www.abc.net.au/radionational/feed/3727018/rss.xml'

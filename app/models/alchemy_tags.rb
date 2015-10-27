@@ -1,8 +1,7 @@
-# Uses Alchemy Api to generate concept tags for articles
 require 'rubygems'
 require 'bundler/setup'
 require 'alchemy_api'
-
+# Uses Alchemy Api to generate concept tags for articles
 class AlchemyTags
   API_KEY = '762220b2942bf268b8d044fad1a5464f9a4bdacf'
 
