@@ -1,40 +1,39 @@
-#
-# This class is a modified version
-# of the User class written by Mat Blair
-# for the Workshop 2 (Wordgram) solution
-#
+# Defines User model 
 class User < ActiveRecord::Base
-	serialize :mailed_articles,Array
+  # Converts attribute mailed_articles from text to Array
+  serialize :mailed_articles,Array
 
-	# Validations
- 	validates_presence_of :email, :first_name, :last_name, :username
-	#validates :email, format: { with: /(.+)@(.+).[a-z]{2,4}/, message: "%{value} is not a valid email" }
-	validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-	validates :username, :length => { minimum: 3 }
-	validates_uniqueness_of :username
+  # Validations
+  validates_presence_of :email, :first_name, :last_name, :username
+  
+  # prevents user to enter multiple emails, and an email of incorrect format
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+	
+  validates :username, :length => { minimum: 3 }
+  validates_uniqueness_of :username
+  
   validates :password, length: { minimum: 8, message: "must be greater than 7 characters" }, :on => :create
   validates :password, :length => { minimum: 8, message: "must be greater than 7 characters" }, :allow_blank => true, :on => :update
 
-	# Users can have interests
-	acts_as_taggable_on :interests
+  # Users have an interest list
+  acts_as_taggable_on :interests
+ 
+  # Passwords are stored as a hash in the database
+  has_secure_password
 
-	# Use secure passwords
-	has_secure_password
+  # Find a user by username, then verify their password
+  def self.authenticate password, username
+    user = User.find_by(username: username)
+	  if user && user.authenticate(password)
+	    return user
+	  else
+		return nil
+	  end
+  end
 
-	# Find a user by email, then check the username is the same
-	def self.authenticate password, username
-		user = User.find_by(username: username)
-		if user && user.authenticate(password)
-			return user
-		else
-			return nil
-		end
-	end
-
-	# Return the user's full name
-	def full_name
-		first_name + ' ' + last_name
-	end
-
+  # Return the user's full name
+  def full_name
+	first_name + ' ' + last_name
+  end
 
 end

@@ -9,6 +9,7 @@ gem 'sentimental', '~> 1.0', '>= 1.0.3'
 gem 'alchemy-api-rb', '~> 0.5.4'
 gem 'indico', '~> 0.5.3'
 gem 'will_paginate', '~> 3.0.5'
+gem 'rubocop', require: false
 # https://github.com/yohasebe/engtagger
 gem 'engtagger', '~> 0.2.0'
 # Mandrill API
