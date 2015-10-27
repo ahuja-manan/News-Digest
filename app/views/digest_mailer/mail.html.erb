@@ -1,0 +1,27 @@
+<% if @articles.length == 0 %> 
+
+	<p>Hey <%= @subscriber.first_name %>, we are sorry but there are no articles matching your interests at the moment. <br/>Hang tight for our next news digest!</p>
+
+<% else %>
+
+	<p>Hey <%= @subscriber.first_name %>, we think you would like these articles :-</p>
+
+	<% @articles.each do |article| %>
+
+			  <div class="panel panel-info">
+			    <div class="panel-heading">
+			      <h4 class="panel-title"><b><%= article.title %></b></h4>
+			    </div>
+
+			    <div class="panel-body">
+
+					<% if article.summary %>
+				    <p>Summary : <%= article.summary %> </p>
+					<% end %>
+
+				    <p>Link : <a href = <%= article.link %> > <%= article.link %> </a> </p>
+
+			  </div>
+	<% end %>
+
+<% end %>
