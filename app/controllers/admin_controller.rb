@@ -29,7 +29,6 @@ class AdminController < ApplicationController
       else
         text = a.title
       end
-      
       @sources = [EntaggerTags.new, IndicoTags.new,SentimentalTags.new, AlchemyTags.new]
       @sources.each do |s|
         tags = s.tag(text)

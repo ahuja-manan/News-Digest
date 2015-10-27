@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'engtagger'
-# Generates noun tags for all articles using Entagger gem
+# Generates noun tags using Entagger gem
 class EntaggerTags
   def tag(text)
     # Create a parser object
@@ -12,7 +12,7 @@ class EntaggerTags
     # Return empty hash for articles with no summary
     return {} if tagged.nil?
 
-    # Get all nouns (not enough proper nouns in the data to get appropriate tags)
+    # Get all nouns
     nouns = tagger.get_nouns(tagged)
     nouns.keys
   end

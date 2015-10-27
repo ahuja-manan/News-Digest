@@ -22,7 +22,9 @@ class SbsImporter
         @article = @source.articles.create(author: author,
                                            title: CGI.unescapeHTML(item.title),
                                            summary: CGI.unescapeHTML(item.description.strip!),
-                                           img: nil, link: item.link, pub_date: item.pubDate)
+                                           img: nil,
+                                           link: item.link,
+                                           pub_date: item.pubDate)
       end
     end
   end
