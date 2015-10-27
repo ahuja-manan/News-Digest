@@ -10,7 +10,7 @@ class AlchemyTags
 		AlchemyAPI.key = API_KEY
 		concepts = AlchemyAPI::EntityExtraction.new.search(text: text)
 		concepts_tags = []
-		concepts.each { |c| concepts_tags.push(c['text'].downcase!, c['type'].downcase! )}
+		concepts.each { |c| concepts_tags.push(c['text'], c['type'] )}
 		concepts_tags
 
     end

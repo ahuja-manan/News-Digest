@@ -15,7 +15,7 @@ class CalasisTags
 			if topics != nil
 				topics.each do |t|
 					
-		        	topics_split = t[:name].downcase.split("&")
+		        	topics_split = t[:name].split("&")
 		        	topics_tags += topics_split
 		      	end
 		    end
