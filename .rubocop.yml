@@ -1,0 +1,7 @@
+StringLiterals:
+  Enabled: false
+AllCops:
+  Excludes:
+    - db/**
+    - bin/**
+    - config/application.rb

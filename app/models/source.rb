@@ -1,6 +1,8 @@
+# Source Model
+# Has attribute name
 class Source < ActiveRecord::Base
-	validates_uniqueness_of :name
+  validates_uniqueness_of :name
 
-	# One source is related to 1..n articles
-	has_many :articles
+  # One source is related to 1..n articles
+  has_many :articles
 end
