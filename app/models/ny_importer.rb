@@ -19,7 +19,7 @@ class NyImporter
     # Parse the response body
     response_json = JSON.parse(response.body)
     response_json['results'].each do |item|
-      @source = Source.find_by_name('New York Times')	    				
+      @source = Source.find_by_name('New York Times')
       @article = @source.articles.create(title: item['title'],\
                                          pub_date: item['published_date'],\
                                          summary: item['abstract'],\

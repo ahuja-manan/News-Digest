@@ -75,7 +75,7 @@ class AdminController < ApplicationController
 
   def get_content(subscriber)
     # subscriber's interests
-    all_relevant_articles = Article.tagged_with(subscriber.interest_list, :any => true).to_a
+    all_relevant_articles = Article.tagged_with(subscriber.interest_list, any: true).to_a
     # stop mailing articles that have already been mailed
     articles_already_mailed_ids = subscriber.mailed_articles
     articles = []

@@ -24,7 +24,7 @@ class GuardianImporter
     # The response JSON is structured such that the items
     # are actually stored at response_json['response']['results']
     response_json['response']['results'].each do |item|
-      @source = Source.find_by_name('The Guardian')				
+      @source = Source.find_by_name('The Guardian')
       @article = @source.articles.create(author: nil,\
                                          title: item['webTitle'],\
                                          summary: nil, img: nil,\

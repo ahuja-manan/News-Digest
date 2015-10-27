@@ -10,9 +10,7 @@ class EntaggerTags
     tagged = tagger.add_tags(text)
 
     # Return empty hash for articles with no summary
-    if(tagged.nil?)
-      return {}
-    end
+    return {} if tagged.nil?
 
     # Get all nouns (not enough proper nouns in the data to get appropriate tags)
     nouns = tagger.get_nouns(tagged)

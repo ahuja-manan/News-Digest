@@ -43,9 +43,10 @@ class Article < ActiveRecord::Base
       end
     end
     # Sort by weight, then by date on matching weights
-    weights = weights.sort_by {|k, v| [v, k.pub_date]}.reverse.to_h
+    weights = weights.sort_by { |k, v| [v, k.pub_date] }.reverse.to_h
 
     # Return the articles as an array
     searched_articles = weights.keys
+    searched_articles
   end
 end
