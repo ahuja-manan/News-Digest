@@ -17,30 +17,31 @@ class Article < ActiveRecord::Base
     articles.each do |article|
       weighting = 0
       weight_map = { article.tag_list => 4, article.title => 3, article.summary => 2, article.source.name => 1 }
-      # Search for just words in the search box
-      # Searching is case insenstive
+      # Search just for the words in the input
       regex = /#{search}/i
-
       weight_map.each do |k, w|
         attribute = k
-        next unless attribute?nil
-        if attribute.is_a?(Array)
-          attribute.each do |e|
-            next unless e.scan(regex).length > 0
-            weighting += w
-            break
+        if attribute != nil
+          if attribute.is_a?(Array)
+            attribute.each do |e|
+              if e.scan(regex).length > 0
+                weighting += w
+                break
+              end
+            end
+          elsif attribute.is_a?(String)
+            if attribute.scan(regex).length > 0
+              weighting += w
+              break
+            end
           end
-        elsif attribute.is_a?(String)
-          next unless attribute.scan(regex).length > 0
-          weighting += w
-          break
         end
       end
 
-      next unless weighting > 0
-      weights[article] = weighting
+      if weighting > 0
+        weights[article] = weighting
+      end
     end
-
     # Sort by weight, then by date on matching weights
     weights = weights.sort_by {|k, v| [v, k.pub_date]}.reverse.to_h
 

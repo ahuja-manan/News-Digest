@@ -15,8 +15,7 @@ class ImporterController < ApplicationController
     # If no search term entered, sort articles by date
     else
       @articles = @articles.order(pub_date: :desc)
-      @articles = @articles.to_a\
-      .paginate(page: params[:page], per_page: 10)
+      @articles = @articles.to_a.paginate(page: params[:page], per_page: 10)
     end
   end
 

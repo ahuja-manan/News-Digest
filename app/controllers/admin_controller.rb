@@ -29,25 +29,18 @@ class AdminController < ApplicationController
       else
         text = a.title
       end
-      tags_save unless text.nil?
-    end
-  end
-
-  private
-
-  def tags_save
-    # tags articles with four different ways*
-    @sources = [EntaggerTags.new, IndicoTags.new,
-                SentimentalTags.new, AlchemyTags.new]
-    @sources.each do |s|
-      tags = s.tag(text)
-      # SentimentalTags returns String, all others return Array
-      if tags.is_a? Array
-        tags.each { |t| a.tag_list.add(t) }
-        a.save
-      elsif tags.is_a? String
-        a.tag_list.add(tags)
-        a.save
+      
+      @sources = [EntaggerTags.new, IndicoTags.new,SentimentalTags.new, AlchemyTags.new]
+      @sources.each do |s|
+        tags = s.tag(text)
+        # SentimentalTags returns String, all others return Array
+        if tags.is_a? Array
+          tags.each { |t| a.tag_list.add(t) }
+          a.save
+        elsif tags.is_a? String
+          a.tag_list.add(tags)
+          a.save
+        end
       end
     end
   end

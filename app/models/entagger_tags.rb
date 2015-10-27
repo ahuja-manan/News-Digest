@@ -10,7 +10,7 @@ class EntaggerTags
     tagged = tagger.add_tags(text)
 
     # Return empty hash for articles with no summary
-    if(tagged?nil)
+    if(tagged.nil?)
       return {}
     end
 
