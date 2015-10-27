@@ -8,21 +8,22 @@ class ImporterController < ApplicationController
 before_action :authenticate_user
 
   def index
-  	@articles = Article.all.paginate(:page => params[:page], :per_page => 10)
+  	@articles = Article.all
 
     # If there is a search term entered, search through the articles, which
     # will be returned
     if params[:search]
-      @articles = Article.search(params[:search], @articles)
+      @articles = Article.search(params[:search], @articles).paginate(:page => params[:page], :per_page => 10)
 
     # If no search term entered, rank articles in descending order
     else
-      @articles.order! 'pub_date DESC'
+      @articles = @articles.order(pub_date: :desc)
+      @articles = @articles.to_a.paginate(:page => params[:page], :per_page => 10)
     end
   end
 
   def my_interests
-    @articles = Article.tagged_with(current_user.interest_list, :any => true).paginate(:page => params[:page], :per_page => 10).to_a
+    @articles = Article.tagged_with(current_user.interest_list, :any => true).to_a.paginate(:page => params[:page], :per_page => 10)
     render 'index'
   end
 end
