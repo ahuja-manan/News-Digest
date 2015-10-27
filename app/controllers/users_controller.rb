@@ -1,5 +1,4 @@
 # This controllers helps create, show, update a User
-
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user, only: [:edit, :destroy, :update]
@@ -17,12 +16,11 @@ class UsersController < ApplicationController
   # user /users
   # user /users.json
   def create
-    @user = User.new(user_params) 
-    
+    @user = User.new(user_params)
     respond_to do |format|
       if @user.save
         log_in @user
-        format.html { redirect_to articles_path, notice: 'user was successfully created.' }
+        format.html { redirect_to articles_path, notice: 'Welcome' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -36,7 +34,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to articles_path, notice: 'user was successfully updated.' }
+        format.html { redirect_to articles_path, notice: 'Updated!' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -51,25 +49,25 @@ class UsersController < ApplicationController
     log_out @user
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to login_path, notice: 'user was successfully destroyed.' }
+      format.html { redirect_to login_path, notice: 'Destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    def check_valid
-      unless @user==current_user
-        redirect_to articles_path, status: 403
-      end
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :bio, :username, :password, :interest_list, :password_confirmation, :is_registered)
+  def check_valid
+    unless @user==current_user
+      redirect_to articles_path, status: 403
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :bio, :username, :password, :interest_list, :password_confirmation, :is_registered)
+  end
 end

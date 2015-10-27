@@ -1,5 +1,6 @@
+# provides functionaility for all controllers
 class ApplicationController < ActionController::Base
-  
+
   # Prevent CSRF attacks by raising an exception.
   protect_from_forgery with: :exception
 
@@ -7,8 +8,6 @@ class ApplicationController < ActionController::Base
   include SessionHelper
 
   def authenticate_user
-  	return unless !current_user
-  	redirect_to login_path, status: 403
+    redirect_to login_path, status: 403 unless current_user
   end
-
 end
