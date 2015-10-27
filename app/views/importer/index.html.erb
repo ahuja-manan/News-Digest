@@ -12,7 +12,9 @@
 <% end %>
 <br/><br/>
 
-<% @articles.each do |article|
+
+<%= will_paginate @articles %>
+<% @articles.each do |article| 
 	@source = Source.find(article.source_id).name %>
 
 		  <div class="panel panel-info">

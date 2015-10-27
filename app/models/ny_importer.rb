@@ -14,7 +14,7 @@ require 'net/http'
 
 class NyImporter
 
-	include TagHelper
+	
 	
 	# Scrape method that saves canned article data
 	def scrape		

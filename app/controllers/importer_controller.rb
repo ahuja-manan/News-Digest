@@ -8,7 +8,7 @@ class ImporterController < ApplicationController
 before_action :authenticate_user
 
   def index
-  	@articles = Article.all
+  	@articles = Article.all.paginate(:page => params[:page], :per_page => 10)
 
     # If there is a search term entered, search through the articles, which
     # will be returned
@@ -22,8 +22,7 @@ before_action :authenticate_user
   end
 
   def my_interests
-    @articles = Article.tagged_with(current_user.interest_list, :any => true).to_a
- 
+    @articles = Article.tagged_with(current_user.interest_list, :any => true).paginate(:page => params[:page], :per_page => 10).to_a
     render 'index'
   end
 end

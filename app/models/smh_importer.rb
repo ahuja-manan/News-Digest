@@ -14,7 +14,7 @@ require 'open-uri'
 
 class SmhImporter
 
-	include TagHelper
+	
 	# This method interprets the description to return the image url
 	def interpret_image description
 		# regular expression for images
@@ -39,8 +39,8 @@ class SmhImporter
 
 			# get rid of </p> tag from the beginning of summary string 
 			summary.slice!('</p>')
+			CGI.unescapeHTML(summary)
 
-			summary
 		else
 			description
 		end
