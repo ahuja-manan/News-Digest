@@ -9,7 +9,7 @@ class IndicoTags
     popular_tags = Indico.text_tags text
     popular_tags_sorted = popular_tags.sort_by { |_k, v| -1.0 * v }.first(10).to_h
     popular_tags = []
-    popular_tags_sorted.each do |k, v|
+    popular_tags_sorted.each do |k, _v|
       popular_split = k.split('_')
       popular_split.delete('and')
       popular_tags += popular_split

@@ -23,7 +23,7 @@ class Article < ActiveRecord::Base
 
       weight_map.each do |k, w|
         attribute = k
-        next unless attribute?nil
+        next unless attribute.nil?
         if attribute.is_a?(Array)
           attribute.each do |e|
             next unless e.scan(regex).length > 0
@@ -42,9 +42,10 @@ class Article < ActiveRecord::Base
     end
 
     # Sort by weight, then by date on matching weights
-    weights = weights.sort_by {|k, v| [v, k.pub_date]}.reverse.to_h
+    weights = weights.sort_by { |k, v| [v, k.pub_date] }.reverse.to_h
 
     # Return the articles as an array
     searched_articles = weights.keys
+    searched_articles
   end
 end

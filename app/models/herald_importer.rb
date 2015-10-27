@@ -27,7 +27,7 @@ class HeraldImporter
     open(url) do |rss|
       feed = RSS::Parser.parse(rss)
       feed.items.each do |item|
-        @source = Source.find_by_name('The Herald Sun)
+        @source = Source.find_by_name('The Herald Sun')
         @article = @source.articles.create(author: nil, title: item.title,\
                                            summary: strip_tags(CGI.unescapeHTML(item.description)),\
                                            img: interpret_image(item.enclosure),\

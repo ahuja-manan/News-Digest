@@ -62,7 +62,7 @@ class UsersController < ApplicationController
   end
 
   def check_valid
-    unless @user==current_user
+    unless @user == current_user
       redirect_to articles_path, status: 403
     end
   end

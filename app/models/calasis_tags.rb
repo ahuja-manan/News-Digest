@@ -12,7 +12,7 @@ class CalasisTags
     topics_tags = []
     oc_response = oc.enrich text
     topics = oc_response.topics
-    return unless topics?nil
+    return unless topics.nil?
     topics.each do |t|
       topics_split = t[:name].split('&')
       topics_tags += topics_split

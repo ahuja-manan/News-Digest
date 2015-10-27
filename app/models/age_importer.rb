@@ -11,7 +11,7 @@ class AgeImporter
     # all image srcs at this source start with http and end with jpg
     image_regex = /http.*(jpg)/
     # get img src out of description string
-	  description.to_s[image_regex]
+    description.to_s[image_regex]
   end
 
   def interpret_summary(description)
